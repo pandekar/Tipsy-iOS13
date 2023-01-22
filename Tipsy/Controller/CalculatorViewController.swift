@@ -22,9 +22,7 @@ class CalculatorViewController: UIViewController {
     }
 
     @IBAction func tipChanged(_ sender: UIButton) {
-        let buttonId: String = sender.currentTitle!
-        sender.isSelected = true
-        _handleButtonSelected(buttonId: buttonId)
+        _handleButtonSelected(sender)
     }
     
     @IBAction func stepperValueChanged(_ sender: UIStepper) {
@@ -34,7 +32,11 @@ class CalculatorViewController: UIViewController {
     }
     
     //handle button selected
-    func _handleButtonSelected(buttonId: String) {
+    func _handleButtonSelected(_ sender: UIButton) {
+        
+        let buttonId: String = sender.currentTitle!
+        sender.isSelected = true
+        
         if zeroPctButton.currentTitle! != buttonId {
             zeroPctButton.isSelected = false
         }
