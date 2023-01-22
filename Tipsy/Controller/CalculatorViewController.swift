@@ -22,7 +22,7 @@ class CalculatorViewController: UIViewController {
     }
 
     @IBAction func tipChanged(_ sender: UIButton) {
-        _handleButtonSelected(sender)
+        _handleTipButtonSelected(sender)
     }
     
     @IBAction func stepperValueChanged(_ sender: UIStepper) {
@@ -34,7 +34,7 @@ class CalculatorViewController: UIViewController {
     }
     
     // handle button selected
-    func _handleButtonSelected(_ sender: UIButton) {
+    func _handleTipButtonSelected(_ sender: UIButton) {
         
         let buttonId: String = sender.currentTitle!
         sender.isSelected = true
@@ -50,6 +50,8 @@ class CalculatorViewController: UIViewController {
         if twentyPctButton.currentTitle! != buttonId {
             twentyPctButton.isSelected = false
         }
+        
+        billTextField.endEditing(true)
     }
     
     // handle stepper value changed
@@ -61,21 +63,24 @@ class CalculatorViewController: UIViewController {
     // handle calculate button pressed
     func _handleCalculateButtonPressed() {
         let selected: Bool = true
-        var selectedValue: Float
+        
+        let currentBill: Float = Float(billTextField.text!) ?? 0.0
+        let selectedValue: Float
+        let splitNumber: Int = Int(splitNumberLabel.text!)!
         
         switch selected {
         case zeroPctButton.isSelected == selected:
             selectedValue = 0.0
-            print(selectedValue)
         case tenPctButton.isSelected == selected:
             selectedValue = 0.1
-            print(selectedValue)
         default:
             selectedValue = 0.2
-            print(selectedValue)
         }
         
-        print(splitNumberLabel.text!)
+        let bill = Bill(value: currentBill, tip: selectedValue, split: splitNumber)
+        let result: Float = bill.calculateTip()
+        
+        print(result)
     }
 }
 
