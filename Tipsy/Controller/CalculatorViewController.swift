@@ -26,12 +26,13 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction func stepperValueChanged(_ sender: UIStepper) {
+        _handleStepperValueChanged(sender)
     }
     
     @IBAction func calculatePressed(_ sender: UIButton) {
     }
     
-    //handle button selected
+    // handle button selected
     func _handleButtonSelected(_ sender: UIButton) {
         
         let buttonId: String = sender.currentTitle!
@@ -48,6 +49,12 @@ class CalculatorViewController: UIViewController {
         if twentyPctButton.currentTitle! != buttonId {
             twentyPctButton.isSelected = false
         }
+    }
+    
+    // handle stepper value changed
+    func _handleStepperValueChanged(_ sender: UIStepper) {
+        let value: Int = Int(sender.value)
+        splitNumberLabel.text = String(value)
     }
 }
 
