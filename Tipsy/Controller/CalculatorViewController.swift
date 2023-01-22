@@ -30,6 +30,7 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction func calculatePressed(_ sender: UIButton) {
+        _handleCalculateButtonPressed()
     }
     
     // handle button selected
@@ -55,6 +56,26 @@ class CalculatorViewController: UIViewController {
     func _handleStepperValueChanged(_ sender: UIStepper) {
         let value: Int = Int(sender.value)
         splitNumberLabel.text = String(value)
+    }
+    
+    // handle calculate button pressed
+    func _handleCalculateButtonPressed() {
+        let selected: Bool = true
+        var selectedValue: Float
+        
+        switch selected {
+        case zeroPctButton.isSelected == selected:
+            selectedValue = 0.0
+            print(selectedValue)
+        case tenPctButton.isSelected == selected:
+            selectedValue = 0.1
+            print(selectedValue)
+        default:
+            selectedValue = 0.2
+            print(selectedValue)
+        }
+        
+        print(splitNumberLabel.text!)
     }
 }
 
