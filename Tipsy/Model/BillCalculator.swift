@@ -27,7 +27,7 @@ struct BillCalculator {
     }
     
     func getCalculatedTip() -> String {
-        return String(bill?.finalValue ?? 0.0)
+        return String(format: "%.2f", bill?.finalValue ?? 0.0)
     }
     
     mutating func calculateTip(value: Float, tip: Float, split: Int) {
