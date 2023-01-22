@@ -12,11 +12,13 @@ struct Bill {
     let value: Float
     let tip: Float
     let split: Int
+    let finalValue: Float
     
-    init (value: Float = 0.0, tip: Float = 0.1, split: Int = 2) {
+    init (value: Float = 0.0, tip: Float = 0.1, split: Int = 2, finalValue: Float) {
         self.value = value
         self.tip = tip
         self.split = split
+        self.finalValue = finalValue
     }
     
     func calculateTip () -> Float {

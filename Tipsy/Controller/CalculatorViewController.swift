@@ -16,6 +16,8 @@ class CalculatorViewController: UIViewController {
     @IBOutlet weak var twentyPctButton: UIButton!
     @IBOutlet weak var splitNumberLabel: UILabel!
     
+    var billCalculator = BillCalculator()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -77,10 +79,20 @@ class CalculatorViewController: UIViewController {
             selectedValue = 0.2
         }
         
-        let bill = Bill(value: currentBill, tip: selectedValue, split: splitNumber)
-        let result: Float = bill.calculateTip()
+        billCalculator.calculateTip(value: currentBill, tip: selectedValue, split: splitNumber)
         
-        print(result)
+        self.performSegue(withIdentifier: "showTipResult", sender: self)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destination.
+        // Pass the selected object to the new view controller.
+        if segue.identifier == "showTipResult" {
+            let resultView = segue.destination as! ResultsViewController
+            resultView.finalTip = billCalculator.getCalculatedTip()
+            resultView.tipPercentage = billCalculator.getTipPercentage()
+            resultView.numberOfPeople = billCalculator.getSplitNumber()
+        }
     }
 }
 
